@@ -1,0 +1,9 @@
+.page {
+    composes: container from global;
+    composes: mx-auto from global;
+}
+
+.breadcrumbs {
+    composes: bg-neutral-400 from global;
+    composes: h-12 from global;
+}

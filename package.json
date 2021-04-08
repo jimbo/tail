@@ -1,0 +1,36 @@
+{
+  "name": "tail",
+  "version": "1.0.0",
+  "description": "Tailwind sandbox",
+  "main": "index.js",
+  "author": "Jimmy Sanford",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "serve": "NODE_ENV=production webpack serve --mode=production",
+    "start": "NODE_ENV=development webpack serve --mode=development"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.1",
+    "@babel/preset-env": "^7.13.5",
+    "@babel/preset-react": "^7.12.13",
+    "autoprefixer": "^10.2.4",
+    "babel-loader": "^8.2.2",
+    "compression-webpack-plugin": "^7.1.2",
+    "css-loader": "^5.0.1",
+    "postcss": "^8.2.4",
+    "postcss-loader": "^5.0.0",
+    "style-loader": "^2.0.0",
+    "tailwindcss": "^2.1.1",
+    "webpack": "^5.19.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "sideEffects": [
+    "*.css"
+  ]
+}
