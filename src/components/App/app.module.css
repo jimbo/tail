@@ -1,9 +1,11 @@
-.page {
-    composes: container from global;
-    composes: mx-auto from global;
+.root {
+	composes: gap-3 from global;
+	composes: grid from global;
 }
 
-.breadcrumbs {
-    composes: bg-neutral-400 from global;
-    composes: h-12 from global;
+.page {
+	composes: container from global;
+	composes: gap-3 from global;
+	composes: grid from global;
+	composes: mx-auto from global;
 }

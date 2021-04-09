@@ -1,65 +1,93 @@
 .root {
-    composes: container from global;
-    composes: xl_gap-6 from global;
-    composes: xl_grid from global;
-    composes: xl_grid-cols-12 from global;
+	composes: container from global;
+	composes: xl_gap-6 from global;
+	composes: xl_grid from global;
+	composes: xl_grid-cols-12 from global;
 }
 
 .carousel {
-    composes: gap-6 from global;
-    composes: grid from global;
-    composes: grid-cols-9 from global;
-    composes: xl_col-span-7 from global;
+	composes: gap-2 from global;
+	composes: grid from global;
+	composes: grid-cols-9 from global;
+	composes: xl_col-span-7 from global;
 }
 
 .thumbnails {
-    composes: bg-neutral-300 from global;
-    composes: col-span-2 from global;
+	composes: col-span-2 from global;
+	composes: gap-6 from global;
+	composes: grid from global;
+	composes: overflow-auto from global;
+	max-height: 800px;
+}
+
+.thumbnail {
+	composes: object-center from global;
+	composes: object-contain from global;
+	composes: rounded-lg from global;
+	max-width: calc(100% - 1rem);
 }
 
 .image {
-    composes: bg-neutral-300 from global;
-    composes: col-span-7 from global;
+	composes: bg-neutral-300 from global;
+	composes: col-span-7 from global;
+	composes: rounded-lg from global;
+	max-height: 800px;
+}
+
+.mockImage {
+	composes: h-full from global;
+	composes: object-center from global;
+	composes: object-cover from global;
+	composes: rounded-lg from global;
 }
 
 .config {
-    composes: xl_col-span-5 from global;
+	composes: xl_col-span-5 from global;
 }
 
 .configHeader {
-    composes: rail-header from global;
+	composes: rail-header from global;
+}
+
+.configBody {
+	composes: rail-body from global;
 }
 
 .productName {
-    composes: rail-title from global;
+	composes: heading from global;
+	composes: rail-title from global;
+}
+
+.price {
+	composes: text-200 from global;
 }
 
 .description {
-    composes: card from global;
-    composes: h-40 from global;
-    composes: xl_col-span-7 from global;
+	composes: card from global;
+	composes: h-40 from global;
+	composes: xl_col-span-7 from global;
 }
 
 .descriptionHeader {
-    composes: card-header from global;
+	composes: card-header from global;
 }
 
 .descriptionTitle {
-    composes: font-semibold from global;
-    composes: text-200 from global;
+	composes: heading from global;
+	composes: text-200 from global;
 }
 
 .details {
-    composes: card from global;
-    composes: h-40 from global;
-    composes: xl_col-span-5 from global;
+	composes: card from global;
+	composes: h-40 from global;
+	composes: xl_col-span-5 from global;
 }
 
 .detailsHeader {
-    composes: card-header from global;
+	composes: card-header from global;
 }
 
 .detailsTitle {
-    composes: font-semibold from global;
-    composes: text-200 from global;
+	composes: heading from global;
+	composes: text-200 from global;
 }

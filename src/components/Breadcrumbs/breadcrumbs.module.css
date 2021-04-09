@@ -1,0 +1,16 @@
+.breadcrumbs {
+	composes: flex from global;
+	composes: h-12 from global;
+	composes: items-center from global;
+	composes: justify-start from global;
+}
+
+.link,
+.separator,
+.title {
+	composes: foo from global;
+}
+
+.separator {
+	composes: px-2 from global;
+}

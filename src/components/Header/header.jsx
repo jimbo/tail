@@ -1,14 +1,14 @@
 import classes from "./header.module.css"
 
-const Header = props => {
-    const { children } = props
+const Header = (props) => {
+	const { children } = props
 
-    return (
-        <>
-            <div className={classes.switcher} />
-            <header className={classes.header} />
-        </>
-    )
+	return (
+		<header className={classes.root}>
+			<div className={classes.switcher} />
+			<nav className={classes.nav} />
+		</header>
+	)
 }
 
 export default Header
