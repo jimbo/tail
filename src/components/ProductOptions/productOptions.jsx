@@ -12,6 +12,17 @@ const data = [
 			["#85d044", "Chartreuse"],
 			["#9256d9", "Purple"]
 		]
+	},
+	{
+		key: "size",
+		name: "Size",
+		swatch: false,
+		values: [
+			["XS", "XS"],
+			["S", "S"],
+			["M", "M"],
+			["L", "L"]
+		]
 	}
 ]
 
@@ -21,7 +32,7 @@ const ProductOptions = (props) => {
 		[]
 	)
 
-	return <div className={classes.options}>{optionElements}</div>
+	return <div className={classes.root}>{optionElements}</div>
 }
 
 export default ProductOptions
@@ -48,8 +59,8 @@ const ProductOption = (props) => {
 			<h3 className={classes.name}>{name}</h3>
 			<ul className={classes.values}>{valueElements}</ul>
 			<dl className={classes.selection}>
-				<dt>Selected value:</dt>
-				<dd>hello</dd>
+				<dt className={classes.selectionLabel}>Selected value:</dt>
+				<dd className={classes.selectionValue}></dd>
 			</dl>
 		</div>
 	)
@@ -58,9 +69,15 @@ const ProductOption = (props) => {
 const ProductOptionValue = (props) => {
 	const { label, swatch, value } = props
 
+	const swatchStyle = useMemo(
+		() => (swatch ? { "--data-value": value } : null),
+		[swatch, value]
+	)
+
 	return (
-		<button className={classes.button} type="button">
-			<span>{label}</span>
+		<button className={classes.valueButton} type="button">
+			<span className={classes.valuePreview} style={swatchStyle} />
+			<span className={classes.valueLabel}>{label}</span>
 		</button>
 	)
 }

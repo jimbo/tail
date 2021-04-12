@@ -1,0 +1,3 @@
+.root {
+	composes: rail-body from global;
+}

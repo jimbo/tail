@@ -1,0 +1,56 @@
+.root {
+	composes: gap-6 from global;
+	composes: grid from global;
+}
+
+.name {
+	composes: text-neutral-900 from global;
+}
+
+.option {
+	composes: gap-3 from global;
+	composes: grid from global;
+}
+
+.values {
+	composes: gap-3 from global;
+	composes: grid from global;
+	composes: grid-flow-col from global;
+	composes: justify-start from global;
+}
+
+.value {
+	composes: grid from global;
+	composes: grid-flow-col from global;
+}
+
+.valueButton {
+	composes: gap-3 from global;
+	composes: grid-flow-col from global;
+	composes: inline-grid from global;
+	composes: items-center from global;
+	composes: justify-start from global;
+}
+
+.valuePreview {
+	composes: border from global;
+	composes: border-neutral-900 from global;
+	composes: border-opacity-10 from global;
+	composes: h-12 from global;
+	composes: rounded from global;
+	composes: shadow-inner from global;
+	composes: w-12 from global;
+	background-color: var(--data-value, transparent);
+}
+
+.valueLabel {
+	composes: hidden from global;
+}
+
+.selection {
+	composes: gap-3 from global;
+	composes: grid from global;
+	composes: grid-flow-col from global;
+	composes: justify-start from global;
+	composes: text-neutral-600 from global;
+}

@@ -1,9 +1,13 @@
-import ProductOptions from "../ProductOptions"
+import ProductConfig from "../ProductConfig"
 import classes from "./productDetail.module.css"
 
 const ProductDetail = (props) => {
 	return (
 		<main className={classes.root}>
+			<div className={classes.header}>
+				<h1 className={classes.productName}>Athena Tank Dress</h1>
+				<p className={classes.price}>$108.00</p>
+			</div>
 			<div className={classes.carousel}>
 				<div className={classes.thumbnails}>
 					<img
@@ -41,13 +45,7 @@ const ProductDetail = (props) => {
 				</div>
 			</div>
 			<div className={classes.config}>
-				<div className={classes.configHeader}>
-					<h1 className={classes.productName}>Athena Tank Dress</h1>
-					<p className={classes.price}>$108.00</p>
-				</div>
-				<div className={classes.configBody}>
-					<ProductOptions />
-				</div>
+				<ProductConfig />
 			</div>
 			<div className={classes.description}>
 				<div className={classes.descriptionHeader}>
@@ -56,16 +54,15 @@ const ProductDetail = (props) => {
 					</h2>
 				</div>
 				<div className={classes.descriptionBody}>
-					<p>
-						{
-							"The Athena Tank Dress offers a high level of structure & details without sacrificing comfort. The collar and front pocket accents paired with pleating detail give a polished look with little effort."
-						}
-					</p>
+					<p dangerouslySetInnerHTML={getDescription()} />
 				</div>
 			</div>
 			<div className={classes.details}>
 				<div className={classes.detailsHeader}>
 					<h2 className={classes.detailsTitle}>Additional Details</h2>
+				</div>
+				<div className={classes.detailsBody}>
+					<p className={classes.details}>{"SKU: VD11"}</p>
 				</div>
 			</div>
 		</main>
@@ -73,3 +70,14 @@ const ProductDetail = (props) => {
 }
 
 export default ProductDetail
+
+const toHtml = (__html) => ({ __html })
+
+const getDescription = () =>
+	toHtml(`
+	<p class="max-w-prose">
+		The Athena Tank Dress offers a high level of structure & details without
+		sacrificing comfort. The collar and front pocket accents paired with
+		pleating detail give a polished look with little effort.
+	</p>
+`)

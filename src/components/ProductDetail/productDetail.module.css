@@ -1,15 +1,44 @@
+/* mixin classes */
+.leftRail {
+	composes: xl_col-end-8 from global;
+	composes: xl_col-start-1 from global;
+}
+
+.rightRail {
+	composes: xl_col-end-13 from global;
+	composes: xl_col-start-8 from global;
+}
+
+/* real classes */
 .root {
 	composes: container from global;
-	composes: xl_gap-6 from global;
-	composes: xl_grid from global;
+	composes: gap-6 from global;
+	composes: grid from global;
 	composes: xl_grid-cols-12 from global;
+	composes: xl_grid-flow-row-dense from global;
+	grid-template-rows: auto 1fr;
+}
+
+.header {
+	composes: rail-header from global;
+	composes: rightRail;
+}
+
+.productName {
+	composes: heading from global;
+	composes: rail-title from global;
+}
+
+.price {
+	composes: text-200 from global;
 }
 
 .carousel {
 	composes: gap-2 from global;
 	composes: grid from global;
 	composes: grid-cols-9 from global;
-	composes: xl_col-span-7 from global;
+	composes: row-span-2 from global;
+	composes: leftRail;
 }
 
 .thumbnails {
@@ -42,30 +71,13 @@
 }
 
 .config {
-	composes: xl_col-span-5 from global;
-}
-
-.configHeader {
-	composes: rail-header from global;
-}
-
-.configBody {
-	composes: rail-body from global;
-}
-
-.productName {
-	composes: heading from global;
-	composes: rail-title from global;
-}
-
-.price {
-	composes: text-200 from global;
+	composes: rightRail;
 }
 
 .description {
 	composes: card from global;
 	composes: h-40 from global;
-	composes: xl_col-span-7 from global;
+	composes: leftRail;
 }
 
 .descriptionHeader {
@@ -80,7 +92,7 @@
 .details {
 	composes: card from global;
 	composes: h-40 from global;
-	composes: xl_col-span-5 from global;
+	composes: rightRail;
 }
 
 .detailsHeader {
@@ -90,4 +102,8 @@
 .detailsTitle {
 	composes: heading from global;
 	composes: text-200 from global;
+}
+
+.unused {
+	composes: max-w-prose from global;
 }

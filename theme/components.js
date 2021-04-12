@@ -47,7 +47,7 @@ const addRulesets = ({ addComponents, theme }) => {
 			fontSize: theme("fontSize.600")
 		},
 		".rail-body": {
-			padding: `${theme("padding.4")} ${theme("padding.0")}`
+			padding: `${theme("padding.6")} ${theme("padding.0")}`
 		}
 	})
 }

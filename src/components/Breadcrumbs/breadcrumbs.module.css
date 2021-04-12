@@ -1,4 +1,5 @@
 .breadcrumbs {
+	composes: container from global;
 	composes: flex from global;
 	composes: h-12 from global;
 	composes: items-center from global;

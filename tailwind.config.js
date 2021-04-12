@@ -26,6 +26,7 @@ module.exports = {
 	separator: "_",
 	theme: {
 		backgroundColor: (theme) => theme("colors"),
+		borderColor: (theme) => theme("colors"),
 		colors,
 		fontFamily: {
 			sans: ["Muli", "ui-sans-serif", "sans-serif"],
@@ -86,6 +87,7 @@ module.exports = {
 			"xl": "1020px",
 			"2xl": "1280px",
 			"3xl": "1440px"
-		}
+		},
+		width: (theme) => theme("height")
 	}
 }
