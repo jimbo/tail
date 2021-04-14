@@ -53,17 +53,27 @@ const ProductDetail = (props) => {
 						Product Description
 					</h2>
 				</div>
-				<div className={classes.descriptionBody}>
-					<p dangerouslySetInnerHTML={getDescription()} />
-				</div>
+				<div
+					className={classes.descriptionBody}
+					dangerouslySetInnerHTML={getDescription()}
+				/>
 			</div>
 			<div className={classes.details}>
 				<div className={classes.detailsHeader}>
 					<h2 className={classes.detailsTitle}>Additional Details</h2>
 				</div>
-				<div className={classes.detailsBody}>
-					<p className={classes.details}>{"SKU: VD11"}</p>
-				</div>
+				<div
+					className={classes.detailsBody}
+					dangerouslySetInnerHTML={getDetails()}
+				/>
+			</div>
+			<div className={classes.banner}>
+				<img
+					className={classes.mockBanner}
+					height={160}
+					src="https://picsum.photos/1280/160"
+					width={1280}
+				/>
 			</div>
 		</main>
 	)
@@ -79,5 +89,12 @@ const getDescription = () =>
 		The Athena Tank Dress offers a high level of structure & details without
 		sacrificing comfort. The collar and front pocket accents paired with
 		pleating detail give a polished look with little effort.
+	</p>
+`)
+
+const getDetails = () =>
+	toHtml(`
+	<p class="max-w-prose">
+		SKU: VD11
 	</p>
 `)

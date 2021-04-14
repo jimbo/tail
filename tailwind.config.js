@@ -5,12 +5,8 @@ const matcher = /(?<=composes:.*)(\b\S+\b)(?=.*from global;)/g
 
 module.exports = {
 	corePlugins: {
-		divideWidth: false
-	},
-	extend: {
-		lineHeight: {
-			DEFAULT: "1.5"
-		}
+		divideWidth: false,
+		float: false
 	},
 	mode: "jit",
 	plugins,
@@ -28,6 +24,17 @@ module.exports = {
 		backgroundColor: (theme) => theme("colors"),
 		borderColor: (theme) => theme("colors"),
 		colors,
+		extend: {
+			gridTemplateColumns: {
+				common: "auto 1fr"
+			},
+			gridTemplateRows: {
+				common: "auto 1fr"
+			},
+			lineHeight: {
+				DEFAULT: "1.5"
+			}
+		},
 		fontFamily: {
 			sans: ["Muli", "ui-sans-serif", "sans-serif"],
 			serif: ["Source Serif Pro", "ui-serif", "serif"]
@@ -49,7 +56,21 @@ module.exports = {
 			1200: "3.5rem",
 			DEFAULT: "0.875rem"
 		},
-		height: {
+		height: (theme) => theme("width"),
+		maxHeight: (theme) => theme("width"),
+		maxWidth: (theme) => theme("width"),
+		minHeight: (theme) => theme("width"),
+		minWidth: (theme) => theme("width"),
+		screens: {
+			"xs": "480px",
+			"sm": "640px",
+			"md": "800px",
+			"lg": "960px",
+			"xl": "1020px",
+			"2xl": "1280px",
+			"3xl": "1440px"
+		},
+		width: {
 			0: "0rem",
 			1: "0.25rem",
 			2: "0.5rem",
@@ -78,16 +99,6 @@ module.exports = {
 			38: "9.5rem",
 			40: "10rem",
 			full: "100%"
-		},
-		screens: {
-			"xs": "480px",
-			"sm": "640px",
-			"md": "800px",
-			"lg": "960px",
-			"xl": "1020px",
-			"2xl": "1280px",
-			"3xl": "1440px"
-		},
-		width: (theme) => theme("height")
+		}
 	}
 }

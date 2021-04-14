@@ -1,0 +1,9 @@
+.nav {
+	composes: bg-neutral-100 from global;
+	composes: h-40 from global;
+}
+
+.legal {
+	composes: bg-neutral-200 from global;
+	composes: h-16 from global;
+}

@@ -1,0 +1,23 @@
+.root {
+	composes: button from global;
+}
+
+.root--high {
+	composes: root;
+}
+
+.root--low {
+	composes: root;
+}
+
+.root--normal {
+	composes: root;
+}
+
+.content {
+	composes: button-content from global;
+}
+
+.icon {
+	composes: button-icon from global;
+}
