@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from "react"
-
 import classes from "./button.module.css"
 
 const Button = (props) => {
 	const { children, onClick, priority = "normal", type = "button" } = props
+	const rootClass = useMemo(() => classes[`root--${priority}`], [priority])
 
 	const handleClick = useCallback(
 		(event) => {
@@ -13,10 +13,6 @@ const Button = (props) => {
 		},
 		[onClick]
 	)
-
-	const rootClass = useMemo(() => classes[`root--${priority}`], [priority])
-
-	console.log({ priority, classes, rootClass })
 
 	return (
 		<button className={rootClass} onClick={handleClick} type={type}>

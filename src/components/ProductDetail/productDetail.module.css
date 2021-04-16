@@ -16,7 +16,7 @@
 /* real classes */
 .root {
 	composes: container from global;
-	composes: gap-12 from global;
+	composes: gap-lg from global;
 	composes: grid from global;
 	composes: grid-rows-common from global;
 	composes: xl_grid-cols-12 from global;
@@ -47,7 +47,7 @@
 
 .thumbnails {
 	composes: col-span-2 from global;
-	composes: gap-6 from global;
+	composes: gap-sm from global;
 	composes: grid from global;
 	composes: overflow-auto from global;
 	max-height: 800px;
@@ -76,6 +76,7 @@
 }
 
 .config {
+	composes: rail-body from global;
 	composes: rightRail;
 }
 

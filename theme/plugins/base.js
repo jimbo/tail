@@ -1,5 +1,5 @@
 const plugin = require("tailwindcss/plugin")
-const { declareColors } = require("./colors")
+const { declareColors } = require("../lib/colors")
 
 const addRulesets = ({ addBase, theme }) => {
 	addBase({

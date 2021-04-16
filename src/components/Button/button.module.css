@@ -11,6 +11,7 @@
 }
 
 .root--normal {
+	composes: button--normal from global;
 	composes: root;
 }
 

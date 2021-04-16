@@ -1,9 +1,10 @@
 const plugins = require("./theme")
-const { colors } = require("./theme/colors")
+const { getColors } = require("./theme/lib/colors")
 
+// match when local classnames compose from tailwind classnames
 const matcher = /(?<=composes:.*)(\b\S+\b)(?=.*from global;)/g
 
-module.exports = {
+const config = {
 	corePlugins: {
 		divideWidth: false,
 		float: false
@@ -23,7 +24,7 @@ module.exports = {
 	theme: {
 		backgroundColor: (theme) => theme("colors"),
 		borderColor: (theme) => theme("colors"),
-		colors,
+		colors: getColors(),
 		extend: {
 			gridTemplateColumns: {
 				common: "auto 1fr"
@@ -33,6 +34,13 @@ module.exports = {
 			},
 			lineHeight: {
 				DEFAULT: "1.5"
+			},
+			spacing: {
+				full: "100%",
+				xs: "0.75rem",
+				sm: "1.5rem",
+				md: "2.25rem",
+				lg: "3rem"
 			}
 		},
 		fontFamily: {
@@ -56,11 +64,10 @@ module.exports = {
 			1200: "3.5rem",
 			DEFAULT: "0.875rem"
 		},
-		height: (theme) => theme("width"),
-		maxHeight: (theme) => theme("width"),
-		maxWidth: (theme) => theme("width"),
-		minHeight: (theme) => theme("width"),
-		minWidth: (theme) => theme("width"),
+		maxHeight: (theme) => theme("spacing"),
+		maxWidth: (theme) => theme("spacing"),
+		minHeight: (theme) => theme("spacing"),
+		minWidth: (theme) => theme("spacing"),
 		screens: {
 			"xs": "480px",
 			"sm": "640px",
@@ -69,36 +76,8 @@ module.exports = {
 			"xl": "1020px",
 			"2xl": "1280px",
 			"3xl": "1440px"
-		},
-		width: {
-			0: "0rem",
-			1: "0.25rem",
-			2: "0.5rem",
-			3: "0.75rem",
-			4: "1rem",
-			5: "1.25rem",
-			6: "1.5rem",
-			7: "1.75rem",
-			8: "2rem",
-			9: "2.25rem",
-			10: "2.5rem",
-			11: "2.75rem",
-			12: "3rem",
-			14: "3.5rem",
-			16: "4rem",
-			18: "4.5rem",
-			20: "5rem",
-			22: "5.5rem",
-			24: "6rem",
-			26: "6.5rem",
-			28: "7rem",
-			30: "7.5rem",
-			32: "8rem",
-			34: "8.5rem",
-			36: "9rem",
-			38: "9.5rem",
-			40: "10rem",
-			full: "100%"
 		}
 	}
 }
+
+module.exports = config

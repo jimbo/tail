@@ -1,13 +1,13 @@
 .root {
-	composes: gap-3 from global;
+	composes: gap-xs from global;
 	composes: grid from global;
 }
 
 .page {
 	composes: container from global;
-	composes: gap-3 from global;
+	composes: gap-xs from global;
 	composes: grid from global;
 	composes: mx-auto from global;
 	composes: pb-9 from global;
-	composes: px-6 from global;
+	composes: px-lg from global;
 }

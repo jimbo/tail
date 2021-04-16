@@ -1,5 +1,4 @@
 import { useCallback } from "react"
-
 import Button from "../Button"
 import ProductOptions from "../ProductOptions"
 import classes from "./productConfig.module.css"

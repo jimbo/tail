@@ -1,4 +1,5 @@
 const plugin = require("tailwindcss/plugin")
+const { withOpacity } = require("../lib/opacity")
 
 const addRulesets = ({ addComponents, theme }) => {
 	addComponents({
@@ -19,6 +20,16 @@ const addRulesets = ({ addComponents, theme }) => {
 			paddingTop: `calc(${theme("padding.2")} + 1px )`,
 			textTransform: "uppercase"
 		},
+		".button--normal": {
+			"--fill": withOpacity(
+				theme("colors.neutral.50"),
+				theme("opacity.0")
+			),
+			"--stroke": theme("colors.neutral.900"),
+			"backgroundColor": "var(--fill)",
+			"borderColor": "var(--stroke)",
+			"color": "var(--stroke)"
+		},
 		".button-content": {
 			alignItems: "center",
 			columnGap: "0.75ch",
@@ -28,7 +39,7 @@ const addRulesets = ({ addComponents, theme }) => {
 			justifyItems: "center"
 		},
 		".button-icon": {
-			borderColor: theme("colors.neutral.900"),
+			borderColor: "var(--stroke)",
 			borderRadius: theme("borderRadius.full"),
 			borderWidth: theme("borderWidth.2"),
 			height: theme("height.4"),
@@ -46,7 +57,7 @@ const addRulesets = ({ addComponents, theme }) => {
 				"borderWidth.0"
 			)}`,
 			display: "grid",
-			gap: theme("gap.3"),
+			gap: theme("gap.xs"),
 			gridTemplateRows: theme("gridTemplateRows.common")
 		},
 		".card-header": {

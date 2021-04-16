@@ -1,5 +1,5 @@
 .root {
-	composes: gap-6 from global;
+	composes: gap-sm from global;
 	composes: grid from global;
 }
 
@@ -8,12 +8,12 @@
 }
 
 .option {
-	composes: gap-3 from global;
+	composes: gap-xs from global;
 	composes: grid from global;
 }
 
 .values {
-	composes: gap-3 from global;
+	composes: gap-xs from global;
 	composes: grid from global;
 	composes: grid-flow-col from global;
 	composes: justify-start from global;
@@ -25,7 +25,7 @@
 }
 
 .valueButton {
-	composes: gap-3 from global;
+	composes: gap-xs from global;
 	composes: grid-flow-col from global;
 	composes: inline-grid from global;
 	composes: items-center from global;
@@ -48,7 +48,7 @@
 }
 
 .selection {
-	composes: gap-3 from global;
+	composes: gap-xs from global;
 	composes: grid from global;
 	composes: grid-flow-col from global;
 	composes: justify-start from global;
