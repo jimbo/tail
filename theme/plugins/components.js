@@ -3,7 +3,6 @@ const { withOpacity } = require("../lib/opacity")
 
 const addRulesets = ({ addComponents, theme }) => {
 	addComponents({
-		// BUTTON
 		".button": {
 			appearance: "none",
 			background: "none",
@@ -18,17 +17,10 @@ const addRulesets = ({ addComponents, theme }) => {
 			paddingLeft: theme("padding.6"),
 			paddingRight: theme("padding.6"),
 			paddingTop: `calc(${theme("padding.2")} + 1px )`,
-			textTransform: "uppercase"
-		},
-		".button--normal": {
-			"--fill": withOpacity(
-				theme("colors.neutral.50"),
-				theme("opacity.0")
-			),
-			"--stroke": theme("colors.neutral.900"),
-			"backgroundColor": "var(--fill)",
-			"borderColor": "var(--stroke)",
-			"color": "var(--stroke)"
+			textTransform: "uppercase",
+			transitionDuration: theme("transitionDuration.DEFAULT"),
+			transitionProperty: theme("transitionProperty.colors"),
+			transitionTimingFunction: theme("transitionTimingFunction.DEFAULT")
 		},
 		".button-content": {
 			alignItems: "center",
@@ -45,10 +37,45 @@ const addRulesets = ({ addComponents, theme }) => {
 			height: theme("height.4"),
 			margin: theme("margin")["0.5"],
 			minWidth: theme("width.4"),
+			transitionDuration: theme("transitionDuration.DEFAULT"),
+			transitionProperty: theme("transitionProperty.colors"),
+			transitionTimingFunction: theme("transitionTimingFunction.DEFAULT"),
 			width: theme("width.4")
 		},
 
-		// CARD
+		".button--high": {
+			"--fill": theme("colors.brand.400"),
+			"--stroke": theme("colors.neutral.50"),
+			"backgroundColor": "var(--fill)",
+			"borderColor": "var(--fill)",
+			"color": "var(--stroke)"
+		},
+		".button--low": {
+			"--fill": withOpacity(
+				theme("colors.neutral.50"),
+				theme("opacity.0")
+			),
+			"--stroke": theme("colors.neutral.900"),
+			"backgroundColor": "var(--fill)",
+			"borderColor": "var(--fill)",
+			"color": "var(--stroke)"
+		},
+		".button--normal": {
+			"--fill": withOpacity(
+				theme("colors.neutral.50"),
+				theme("opacity.0")
+			),
+			"--stroke": theme("colors.neutral.900"),
+			"backgroundColor": "var(--fill)",
+			"borderColor": "var(--stroke)",
+			"color": "var(--stroke)",
+			"&:hover": {
+				"--fill": theme("colors.neutral.900"),
+				"--stroke": theme("colors.neutral.50"),
+				"borderColor": "var(--fill)"
+			}
+		},
+
 		".card": {
 			borderColor: `transparent transparent ${theme(
 				"colors.neutral.200"
@@ -69,7 +96,6 @@ const addRulesets = ({ addComponents, theme }) => {
 			margin: `${theme("margin.6")} ${theme("margin.0")}`
 		},
 
-		// FOO
 		".foo": {
 			alignItems: "center",
 			display: "flex",
@@ -81,13 +107,11 @@ const addRulesets = ({ addComponents, theme }) => {
 			justifyContent: "center"
 		},
 
-		// HEADING
 		".heading": {
 			color: theme("colors.neutral.900"),
 			fontWeight: theme("fontWeight.semibold")
 		},
 
-		// RAIL
 		".rail-header": {
 			alignItems: "baseline",
 			borderColor: `transparent transparent ${theme(

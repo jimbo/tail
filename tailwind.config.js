@@ -76,6 +76,19 @@ const config = {
 			"xl": "1020px",
 			"2xl": "1280px",
 			"3xl": "1440px"
+		},
+		transitionDuration: {
+			100: "64ms",
+			200: "128ms",
+			300: "192ms",
+			400: "256ms",
+			500: "320ms",
+			600: "384ms",
+			700: "448ms",
+			800: "512ms",
+			DEFAULT: "384ms",
+			enter: "224ms",
+			exit: "192ms"
 		}
 	}
 }

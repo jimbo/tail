@@ -3,10 +3,12 @@
 }
 
 .root--high {
+	composes: button--high from global;
 	composes: root;
 }
 
 .root--low {
+	composes: button--low from global;
 	composes: root;
 }
 
