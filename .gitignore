@@ -3,7 +3,13 @@
 .history
 .idea
 .vscode
-dist
+dist/*
 node_modules
 npm-debug.log
 yarn-error.log
+
+!dist/apple-touch-icon.png
+!dist/favicon-16x16.png
+!dist/favicon-32x32.png
+!dist/favicon.ico
+!dist/index.html
