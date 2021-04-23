@@ -1,15 +1,16 @@
 const createPlugin = require("tailwindcss/plugin")
 
-const plugins = new Map()
+const plugins = [
 	// base plugins
-	.set(...require("./root"))
-	.set(...require("./body"))
+	require("./root"),
+	require("./body"),
 	// component plugins
-	.set(...require("./button"))
-	.set(...require("./card"))
-	.set(...require("./foo"))
-	.set(...require("./heading"))
-	.set(...require("./rail"))
+	require("./button"),
+	require("./card"),
+	require("./foo"),
+	require("./heading"),
+	require("./rail")
+]
 
 const includePlugins = (pluginApi) => {
 	const { theme } = pluginApi
