@@ -1,4 +1,3 @@
-const plugin = require("tailwindcss/plugin")
 const { withOpacity } = require("../lib/opacity")
 
 const addRulesets = ({ addComponents, theme }) => {
@@ -74,60 +73,9 @@ const addRulesets = ({ addComponents, theme }) => {
 				"--stroke": theme("colors.neutral.50"),
 				"borderColor": "var(--fill)"
 			}
-		},
-
-		".card": {
-			borderColor: `transparent transparent ${theme(
-				"colors.neutral.200"
-			)}`,
-			borderWidth: `${theme("borderWidth.DEFAULT")} ${theme(
-				"borderWidth.0"
-			)}`,
-			display: "grid",
-			gap: theme("gap.xs"),
-			gridTemplateRows: theme("gridTemplateRows.common")
-		},
-		".card-header": {
-			alignItems: "center",
-			display: "flex",
-			minHeight: theme("height.12")
-		},
-		".card-title": {
-			margin: `${theme("margin.6")} ${theme("margin.0")}`
-		},
-
-		".foo": {
-			alignItems: "center",
-			display: "flex",
-			justifyContent: "center"
-		},
-		".foo-inline": {
-			alignItems: "center",
-			display: "inline-flex",
-			justifyContent: "center"
-		},
-
-		".heading": {
-			color: theme("colors.neutral.900"),
-			fontWeight: theme("fontWeight.semibold")
-		},
-
-		".rail-header": {
-			alignItems: "baseline",
-			borderColor: `transparent transparent ${theme(
-				"colors.neutral.200"
-			)}`,
-			borderWidth: `${theme("borderWidth.2")} ${theme("borderWidth.0")}`,
-			display: "flex",
-			fontWeight: theme("fontWeight.semibold"),
-			padding: `${theme("padding.2")} ${theme("padding.0")}`
-		},
-		".rail-title": {
-			flex: theme("flex.auto"),
-			fontSize: theme("fontSize.600")
-		},
-		".rail-body": {}
+		}
 	})
 }
 
-module.exports = [plugin(addRulesets)]
+const ID = "button"
+module.exports = [ID, addRulesets]

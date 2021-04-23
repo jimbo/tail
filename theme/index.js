@@ -1,8 +1,6 @@
 const { getColors } = require("./lib/colors")
 const matcher = require("./lib/matcher")
-const base = require("./plugins/base")
-const components = require("./plugins/components")
-const utilities = require("./plugins/utilities")
+const veniaPlugin = require("./plugins")
 
 const config = {
 	corePlugins: {
@@ -10,7 +8,7 @@ const config = {
 		float: false
 	},
 	mode: "jit",
-	plugins: [...base, ...components, ...utilities],
+	plugins: [veniaPlugin],
 	purge: {
 		content: ["./src/**/*.css"],
 		extractors: [
@@ -90,6 +88,9 @@ const config = {
 			"enter": "224ms",
 			"exit": "192ms"
 		}
+	},
+	venia: {
+		foo: "foo"
 	}
 }
 

@@ -1,11 +1,6 @@
-const plugin = require("tailwindcss/plugin")
-const { declareColors } = require("../lib/colors")
-
 const addRulesets = ({ addBase, theme }) => {
 	addBase({
-		":root": declareColors(),
-
-		"body": {
+		body: {
 			backgroundColor: theme("colors.neutral.50"),
 			color: theme("colors.neutral.800"),
 			fontSize: theme("fontSize.DEFAULT")
@@ -13,4 +8,5 @@ const addRulesets = ({ addBase, theme }) => {
 	})
 }
 
-module.exports = [plugin(addRulesets)]
+const ID = "body"
+module.exports = [ID, addRulesets]
