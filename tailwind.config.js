@@ -1,12 +1,7 @@
 const venia = require("./theme")
 
 const config = {
-	presets: [venia],
-	theme: {
-		venia: {
-			plugins: {}
-		}
-	}
+	presets: [venia]
 }
 
 module.exports = config
