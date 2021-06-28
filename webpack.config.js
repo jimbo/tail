@@ -7,8 +7,7 @@ const localIdentNames = new Map()
 module.exports = (env, argv) => ({
 	mode: argv.mode,
 	entry: {
-		main: ["./src/index.js"],
-		react: ["react", "react-dom"]
+		main: ["./src/index.js"]
 	},
 	output: {
 		filename: "[name].js",
@@ -22,7 +21,10 @@ module.exports = (env, argv) => ({
 				test: /\.module\.css$/,
 				use: [
 					{
-						loader: "style-loader"
+						loader: resolve(
+							__dirname,
+							"./src/loaders/custom-loader.js"
+						)
 					},
 					{
 						loader: "css-loader",
@@ -40,7 +42,7 @@ module.exports = (env, argv) => ({
 				]
 			},
 			{
-				// include `.css` files, exclude `.module.css` files
+				// exclude `.module.css` files
 				test: /(?<!\.module)\.css$/,
 				use: [
 					{

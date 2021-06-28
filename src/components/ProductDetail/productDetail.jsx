@@ -1,7 +1,10 @@
 import ProductConfig from "../ProductConfig"
+import { useStyle } from "../Style"
 import classes from "./productDetail.module.css"
 
 const ProductDetail = (props) => {
+	useStyle(classes)
+
 	return (
 		<main className={classes.root}>
 			<div className={classes.header}>

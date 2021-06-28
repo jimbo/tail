@@ -1,6 +1,9 @@
+import { useStyle } from "../Style"
 import classes from "./breadcrumbs.module.css"
 
 const Breadcrumbs = (props) => {
+	useStyle(classes)
+
 	return (
 		<nav className={classes.breadcrumbs}>
 			<a className={classes.link}>Home</a>
