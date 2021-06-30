@@ -1,23 +1,52 @@
+import { Suspense, createContext, lazy, useContext, useState } from "react"
 import Breadcrumbs from "../Breadcrumbs"
 import Footer from "../Footer"
 import Header from "../Header"
-import ProductDetail from "../ProductDetail"
 import { useStyle } from "../Style"
 import classes from "./page.module.css"
 
+const PageContext = createContext()
+const Checkout = lazy(() => import("../Checkout"))
+const ProductDetail = lazy(() => import("../ProductDetail"))
+
 const Page = (props) => {
 	useStyle(classes)
+	const [page, setPage] = useState("PRODUCT")
+	let main = null
+
+	switch (page) {
+		case "PRODUCT": {
+			main = (
+				<Suspense fallback={null}>
+					<ProductDetail />
+				</Suspense>
+			)
+			break
+		}
+		case "CHECKOUT": {
+			main = (
+				<Suspense fallback={null}>
+					<Checkout />
+				</Suspense>
+			)
+			break
+		}
+	}
 
 	return (
-		<div className={classes.root}>
-			<Header />
-			<div className={classes.body}>
-				<Breadcrumbs />
-				<ProductDetail />
+		<PageContext.Provider value={setPage}>
+			<div className={classes.root}>
+				<Header />
+				<div className={classes.body}>
+					<Breadcrumbs />
+					{main}
+				</div>
+				<Footer />
 			</div>
-			<Footer />
-		</div>
+		</PageContext.Provider>
 	)
 }
 
 export default Page
+
+export const usePage = () => useContext(PageContext)

@@ -82,6 +82,7 @@ module.exports = (env, argv) => ({
 	},
 	devServer: {
 		contentBase: "./dist",
+		historyApiFallback: true,
 		publicPath: "/"
 	},
 	devtool: argv.mode === "production" ? "source-map" : "eval-source-map"

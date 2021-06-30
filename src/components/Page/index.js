@@ -1,1 +1,1 @@
-export { default } from "./page.jsx"
+export { default, usePage } from "./page.jsx"

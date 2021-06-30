@@ -3,43 +3,41 @@ import { Helmet } from "react-helmet-async"
 import { StyleContext } from "./context"
 
 const StyleProvider = (props) => {
-	const [ids, setIds] = useState(new Map())
+	const [modules, setModules] = useState(new Map())
 
 	const includeStyle = useCallback(
 		(...args) => {
 			for (const arg of args) {
-				setIds((current) => {
-					const path = arg._getId()
-					const next = current.has(path)
+				setModules((current) => {
+					const text = arg._getCss()
+					const path = arg._getPath()
+					const uuid = arg._getUuid()
+					const next = current.has(uuid)
 						? current
-						: new Map(current).set(path, [
-								1 + current.size,
-								arg._getCss()
-						  ])
+						: new Map(current).set(uuid, { path, text })
 
 					return next
 				})
 			}
 		},
-		[setIds]
+		[setModules]
 	)
 
 	const styleElements = useMemo(() => {
 		const elements = []
 
-		for (const entry of ids) {
-			const [path, data] = entry
-			const [id, text] = data
+		for (const cssModule of modules) {
+			const [uuid, { path, text }] = cssModule
 
 			elements.push(
-				<style key={id} type="text/css">
+				<style key={uuid} data-path={path} type="text/css">
 					{text}
 				</style>
 			)
 		}
 
 		return elements
-	}, [ids])
+	}, [modules])
 
 	return (
 		<StyleContext.Provider value={includeStyle}>
