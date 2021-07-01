@@ -11,10 +11,9 @@ const StyleProvider = (props) => {
 				setModules((current) => {
 					const text = arg._getCss()
 					const path = arg._getPath()
-					const uuid = arg._getUuid()
-					const next = current.has(uuid)
+					const next = current.has(path)
 						? current
-						: new Map(current).set(uuid, { path, text })
+						: new Map(current).set(path, text)
 
 					return next
 				})
@@ -27,10 +26,10 @@ const StyleProvider = (props) => {
 		const elements = []
 
 		for (const cssModule of modules) {
-			const [uuid, { path, text }] = cssModule
+			const [path, text] = cssModule
 
 			elements.push(
-				<style key={uuid} data-path={path} type="text/css">
+				<style key={path} type="text/css">
 					{text}
 				</style>
 			)
