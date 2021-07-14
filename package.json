@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "build": "NODE_ENV=production webpack --mode=production",
+    "clean": "rm -rf dist",
     "format": "prettier --write '@(src|theme)/**/*.@(css|js|jsx)' '*.js'",
     "serve": "NODE_ENV=production webpack serve --mode=production",
     "start": "NODE_ENV=development webpack serve --mode=development"

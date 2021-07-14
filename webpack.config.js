@@ -8,15 +8,15 @@ const localIdentNames = new Map()
 	.set("development", "[local]✅[hash:base64:3]")
 	.set("production", "[hash:base64:5]")
 
-module.exports = (env, argv) => {
-	const config = {
+function getClientConfig(env, argv) {
+	return {
 		name: "client",
 		mode: argv.mode,
 		entry: {
-			main: ["./src/index.js"]
+			main: "./src/index.js"
 		},
 		output: {
-			clean: true,
+			// clean: true,
 			filename: "[name].js",
 			path: resolve(__dirname, "dist"),
 			publicPath: "/"
@@ -108,26 +108,29 @@ module.exports = (env, argv) => {
 		},
 		devtool: argv.mode === "production" ? "source-map" : "eval-source-map"
 	}
+}
 
-	const serverConfig = Object.assign({}, config, {
+function getServerConfig(env, argv) {
+	const config = getClientConfig(env, argv)
+
+	return {
+		...config,
 		name: "server",
 		target: "node",
 		entry: {
-			main: ["./src/index.js"],
-			server: ["./src/server.js"]
+			server: "./src/server.js"
 		},
 		output: { ...config.output },
 		module: { ...config.module },
-		plugins: [...config.plugins],
+		plugins: [
+			...config.plugins,
+			new LimitChunkCountPlugin({
+				maxChunks: 1
+			})
+		],
 		devServer: void 0,
 		devtool: false
-	})
-
-	serverConfig.plugins.push(
-		new LimitChunkCountPlugin({
-			maxChunks: 1
-		})
-	)
-
-	return [config, serverConfig]
+	}
 }
+
+module.exports = [getClientConfig, getServerConfig]

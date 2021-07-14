@@ -16,25 +16,25 @@ const ProductDetail = (props) => {
 					<img
 						className={classes.thumbnail}
 						height={400}
-						src="https://picsum.photos/322/400"
+						src="https://picsum.photos/seed/picsum/322/400"
 						width={322}
 					/>
 					<img
 						className={classes.thumbnail}
 						height={400}
-						src="https://picsum.photos/322/400"
+						src="https://picsum.photos/seed/picsum/322/400"
 						width={322}
 					/>
 					<img
 						className={classes.thumbnail}
 						height={400}
-						src="https://picsum.photos/322/400"
+						src="https://picsum.photos/seed/picsum/322/400"
 						width={322}
 					/>
 					<img
 						className={classes.thumbnail}
 						height={400}
-						src="https://picsum.photos/322/400"
+						src="https://picsum.photos/seed/picsum/322/400"
 						width={322}
 					/>
 				</div>
@@ -42,7 +42,7 @@ const ProductDetail = (props) => {
 					<img
 						className={classes.mockImage}
 						height={800}
-						src="https://picsum.photos/645/800"
+						src="https://picsum.photos/seed/picsum/645/800"
 						width={645}
 					/>
 				</div>
