@@ -1,7 +1,10 @@
+import { useStyle } from "../Style"
 import classes from "./header.module.css"
 
 const Header = (props) => {
 	const { children } = props
+
+	useStyle(classes)
 
 	return (
 		<header className={classes.root}>

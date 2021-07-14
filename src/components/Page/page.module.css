@@ -3,7 +3,7 @@
 	composes: grid from global;
 }
 
-.page {
+.body {
 	composes: container from global;
 	composes: gap-xs from global;
 	composes: grid from global;

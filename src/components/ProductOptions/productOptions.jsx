@@ -1,4 +1,5 @@
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
+import { useStyle } from "../Style"
 import classes from "./productOptions.module.css"
 
 const data = [
@@ -39,6 +40,8 @@ export default ProductOptions
 
 const ProductOption = (props) => {
 	const { name, swatch, values } = props
+
+	useStyle(classes)
 
 	const valueElements = useMemo(
 		() =>
