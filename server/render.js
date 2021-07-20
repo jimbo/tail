@@ -1,10 +1,13 @@
 import { pipeToNodeWritable } from "react-dom/server"
 import App from "../src/components/App"
 
-const render = (url, res) => {
+const render = (url, res, stats) => {
 	console.log("Time to render.")
-	console.log(url)
 	let didError = false
+
+	for (const child of stats.children) {
+		console.log(child)
+	}
 
 	res.socket.on("error", error => {
 		console.error("A socket error occurred.")

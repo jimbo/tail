@@ -12,18 +12,21 @@ const respond = fn => async (req, res, next) => {
 }
 
 const buildAndRender = async (req, res) => {
-	const render = await waitForWebpack()
+	const { render, stats } = await waitForWebpack()
 
-	render(req.url, res)
+	render(req.url, res, stats)
 }
 
 const waitForWebpack = async () => {
 	while (true) {
 		try {
 			const { default: render } = require("../dist/server.js")
-			console.log("Found server.js.")
-			return render
+			const stats = require("../dist/stats.json")
+			console.log("Webpack is done.")
+
+			return { render, stats }
 		} catch (error) {
+			console.error(error)
 			console.log("Not found. Will retry.")
 
 			await new Promise(resolve => setTimeout(resolve, 1000))

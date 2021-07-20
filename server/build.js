@@ -7,7 +7,7 @@ const handleCompile = (buildError, stats) => {
 	if (buildError) {
 		console.error(buildError)
 		process.exit(1)
-		return
+		// return
 	}
 
 	const info = stats.toJson()
@@ -21,11 +21,11 @@ const handleCompile = (buildError, stats) => {
 		}
 
 		process.exit(1)
-		return
+		// return
 	}
 
 	console.log("Webpack compiled cleanly.")
 }
 
-rimraf.sync(resolve(__dirname, "../dist"))
+rimraf.sync(resolve(__dirname, "../dist/**/*.*"))
 webpack(config, handleCompile)

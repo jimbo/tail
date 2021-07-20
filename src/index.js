@@ -1,5 +1,3 @@
-import { createRoot } from "react-dom"
+import { hydrateRoot } from "react-dom"
 import App from "./components/App"
-import "./index.css"
-
-createRoot(document.getElementById("root")).render(<App />)
+import "../src/index.css"

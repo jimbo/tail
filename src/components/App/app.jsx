@@ -1,14 +1,11 @@
-import { HelmetProvider } from "react-helmet-async"
+import Html from "../Html"
 import Page from "../Page"
-import StyleProvider from "../Style"
 
 const App = (props) => {
 	return (
-		<HelmetProvider>
-			<StyleProvider>
-				<Page />
-			</StyleProvider>
-		</HelmetProvider>
+		<Html>
+			<Page />
+		</Html>
 	)
 }
 

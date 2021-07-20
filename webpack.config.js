@@ -1,5 +1,6 @@
 const { resolve } = require("path")
 const CopyPlugin = require("copy-webpack-plugin")
+const ExtractPlugin = require("mini-css-extract-plugin")
 
 const mode = process.env.NODE_ENV.toLowerCase()
 const isProduction = mode === "production"
@@ -14,6 +15,7 @@ const createConfig = (name) => {
 
 	// output
 	const output = {
+		clean: !isServer,
 		filename: "[name].js",
 		path: resolve(__dirname, "dist")
 	}
@@ -58,7 +60,10 @@ const createConfig = (name) => {
 			test: /(?<!\.module)\.css$/,
 			use: [
 				{
-					loader: "style-loader"
+					loader: ExtractPlugin.loader,
+					options: {
+						emit: true
+					}
 				},
 				{
 					loader: "css-loader",
@@ -97,7 +102,7 @@ const createConfig = (name) => {
 	// plugins
 	const plugins = []
 
-	if (isServer)
+	if (isServer) {
 		plugins.push(
 			new CopyPlugin({
 				patterns: [
@@ -110,6 +115,13 @@ const createConfig = (name) => {
 				]
 			})
 		)
+	} else {
+		plugins.push(
+			new ExtractPlugin({
+				insert: () => {}
+			})
+		)
+	}
 
 	// devtool
 	// const devtool = isProduction || isServer ? "source-map" : "eval-source-map"
@@ -119,7 +131,12 @@ const createConfig = (name) => {
 	const target = isServer ? "node" : "web"
 
 	// stats
-	const stats = true
+	const stats = {
+		assets: true,
+		children: false,
+		chunks: false,
+		modules: false
+	}
 
 	// final config
 	return {
