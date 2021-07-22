@@ -3,7 +3,7 @@ const express = require("express")
 const PORT = "4000"
 
 // define callbacks for responding
-const respond = fn => async (req, res, next) => {
+const respond = (fn) => async (req, res, next) => {
 	try {
 		return await fn(req, res)
 	} catch (error) {
@@ -12,24 +12,26 @@ const respond = fn => async (req, res, next) => {
 }
 
 const buildAndRender = async (req, res) => {
-	const { render, stats } = await waitForWebpack()
+	const { assets, render } = await waitForWebpack()
 
-	render(req.url, res, stats)
+	render(req.url, res, assets)
 }
 
 const waitForWebpack = async () => {
 	while (true) {
 		try {
-			const { default: render } = require("../dist/server.js")
-			const stats = require("../dist/stats.json")
-			console.log("Webpack is done.")
+			const clientStats = require("../dist/stats-client.json")
+			const serverStats = require("../dist/stats-server.json")
+			const { main: clientAssets } = clientStats.assetsByChunkName
+			const { server: serverAssets } = serverStats.assetsByChunkName
+			const [filename] = serverAssets
+			const { default: render } = require(`../dist/${filename}`)
 
-			return { render, stats }
+			return { assets: clientAssets, render }
 		} catch (error) {
 			console.error(error)
-			console.log("Not found. Will retry.")
 
-			await new Promise(resolve => setTimeout(resolve, 1000))
+			await new Promise((resolve) => setTimeout(resolve, 10000))
 		}
 	}
 }

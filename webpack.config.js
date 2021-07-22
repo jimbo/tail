@@ -1,6 +1,7 @@
 const { resolve } = require("path")
 const CopyPlugin = require("copy-webpack-plugin")
 const ExtractPlugin = require("mini-css-extract-plugin")
+const { StatsWriterPlugin } = require("webpack-stats-plugin")
 
 const mode = process.env.NODE_ENV.toLowerCase()
 const isProduction = mode === "production"
@@ -15,8 +16,7 @@ const createConfig = (name) => {
 
 	// output
 	const output = {
-		clean: !isServer,
-		filename: "[name].js",
+		filename: "[name].[contenthash].js",
 		path: resolve(__dirname, "dist")
 	}
 
@@ -113,12 +113,23 @@ const createConfig = (name) => {
 						}
 					}
 				]
+			}),
+			new StatsWriterPlugin({
+				all: false,
+				assets: true,
+				filename: "stats-server.json"
 			})
 		)
 	} else {
 		plugins.push(
 			new ExtractPlugin({
-				insert: () => {}
+				filename: "[name].[contenthash].css",
+				insert() {}
+			}),
+			new StatsWriterPlugin({
+				all: false,
+				assets: true,
+				filename: "stats-client.json"
 			})
 		)
 	}
@@ -133,7 +144,7 @@ const createConfig = (name) => {
 	// stats
 	const stats = {
 		assets: true,
-		children: false,
+		children: true,
 		chunks: false,
 		modules: false
 	}
@@ -147,8 +158,7 @@ const createConfig = (name) => {
 		module,
 		plugins,
 		devtool,
-		target,
-		stats
+		target
 	}
 }
 

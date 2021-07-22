@@ -74,7 +74,7 @@ const ProductDetail = (props) => {
 				<img
 					className={classes.mockBanner}
 					height={160}
-					src="https://picsum.photos/1280/160"
+					src="https://picsum.photos/seed/picsum/1280/160"
 					width={1280}
 				/>
 			</div>

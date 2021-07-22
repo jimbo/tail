@@ -2,8 +2,10 @@ import Html from "../Html"
 import Page from "../Page"
 
 const App = (props) => {
+	const { assets } = props
+
 	return (
-		<Html>
+		<Html assets={assets}>
 			<Page />
 		</Html>
 	)

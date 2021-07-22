@@ -7,11 +7,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build:dev": "NODE_ENV=development webpack --watch --json dist/stats.json",
-    "watch": "NODE_ENV=development nodemon server/build.js",
+    "build:dev": "NODE_ENV=development nodemon server/build.js",
     "build:prod": "NODE_ENV=production nodemon server/build.js",
     "clean": "rimraf dist",
-    "format": "prettier --write '@(src|theme)/**/*.@(css|js|jsx)' '*.js'",
+    "format": "prettier --write '@(server|src|theme)/**/*.@(css|js|jsx)' '*.js'",
     "serve:dev": "NODE_ENV=development nodemon server/server.js",
     "serve:prod": "NODE_ENV=production nodemon server/server.js"
   },
@@ -32,7 +31,8 @@
     "tailwindcss": "^2.1.1",
     "webpack": "^5.41.1",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-stats-plugin": "^1.0.3"
   },
   "dependencies": {
     "compression": "1.7.4",

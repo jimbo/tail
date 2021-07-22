@@ -28,4 +28,5 @@ const handleCompile = (buildError, stats) => {
 }
 
 rimraf.sync(resolve(__dirname, "../dist/**/*.*"))
-webpack(config, handleCompile)
+webpack(config[0], handleCompile)
+webpack(config[1], handleCompile)
