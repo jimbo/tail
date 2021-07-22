@@ -1,95 +1,109 @@
 const { resolve } = require("path")
-const webpack = require("webpack")
-
 const CopyPlugin = require("copy-webpack-plugin")
-const { LimitChunkCountPlugin } = webpack.optimize
+const ExtractPlugin = require("mini-css-extract-plugin")
+const { StatsWriterPlugin } = require("webpack-stats-plugin")
 
-const localIdentNames = new Map()
-	.set("development", "[local]✅[hash:base64:3]")
-	.set("production", "[hash:base64:5]")
+const mode = process.env.NODE_ENV.toLowerCase()
+const isProduction = mode === "production"
 
-function getClientConfig(env, argv) {
-	return {
-		name: "client",
-		mode: argv.mode,
-		entry: {
-			main: "./src/index.js"
-		},
-		output: {
-			// clean: true,
-			filename: "[name].js",
-			path: resolve(__dirname, "dist"),
-			publicPath: "/"
-		},
-		module: {
-			rules: [
+const createConfig = (name) => {
+	const isServer = name === "server"
+
+	// entry
+	const entry = isServer
+		? { server: "./server/render.js" }
+		: { main: "./src/index.js" }
+
+	// output
+	const output = {
+		filename: "[name].[contenthash].js",
+		path: resolve(__dirname, "dist")
+	}
+
+	if (isServer) output.library = { type: "commonjs2" }
+	else output.publicPath = "/"
+
+	// module
+	const module = {}
+	const targets = isServer ? { node: "14" } : { chrome: "88" }
+	const presets = [
+		["@babel/preset-env"],
+		["@babel/preset-react", { runtime: "automatic" }]
+	]
+	const localIdentName = isProduction
+		? "[hash:base64:5]"
+		: "[local]@[hash:base64:3]"
+
+	module.rules = [
+		{
+			test: /\.module\.css$/,
+			use: [
 				{
-					// include `.module.css` files only
-					test: /\.module\.css$/,
-					use: [
-						{
-							loader: resolve(
-								__dirname,
-								"./src/loaders/custom-loader.js"
-							)
-						},
-						{
-							loader: "css-loader",
-							options: {
-								importLoaders: 1,
-								modules: {
-									localIdentName: localIdentNames.get(
-										argv.mode
-									),
-									mode: "local"
-								}
-							}
-						},
-						{
-							loader: "postcss-loader"
-						}
-					]
+					loader: resolve(__dirname, "./src/loaders/custom-loader.js")
 				},
 				{
-					// exclude `.module.css` files
-					test: /(?<!\.module)\.css$/,
-					use: [
-						{
-							loader: "style-loader"
-						},
-						{
-							loader: "css-loader",
-							options: {
-								importLoaders: 1,
-								modules: false
-							}
-						},
-						{
-							loader: "postcss-loader"
+					loader: "css-loader",
+					options: {
+						importLoaders: 1,
+						modules: {
+							localIdentName,
+							mode: "local"
 						}
-					]
+					}
 				},
 				{
-					test: /\.jsx$/,
-					exclude: /node_modules/,
-					use: [
-						{
-							loader: "babel-loader"
-						}
-					]
-				},
-				{
-					test: /\.js$/,
-					exclude: /node_modules/,
-					use: [
-						{
-							loader: "babel-loader"
-						}
-					]
+					loader: "postcss-loader"
 				}
 			]
 		},
-		plugins: [
+		{
+			test: /(?<!\.module)\.css$/,
+			use: [
+				{
+					loader: ExtractPlugin.loader,
+					options: {
+						emit: true
+					}
+				},
+				{
+					loader: "css-loader",
+					options: {
+						importLoaders: 1,
+						modules: false
+					}
+				},
+				{
+					loader: "postcss-loader"
+				}
+			]
+		},
+		{
+			test: /\.jsx$/,
+			exclude: /node_modules/,
+			use: [
+				{
+					loader: "babel-loader",
+					options: { presets, targets }
+				}
+			]
+		},
+		{
+			test: /\.js$/,
+			exclude: /node_modules/,
+			use: [
+				{
+					loader: "babel-loader",
+					options: { presets, targets }
+				}
+			]
+		}
+	]
+
+	// plugins
+	const plugins = []
+
+	if (isServer) {
+		plugins.push(
 			new CopyPlugin({
 				patterns: [
 					{
@@ -99,38 +113,66 @@ function getClientConfig(env, argv) {
 						}
 					}
 				]
+			}),
+			new StatsWriterPlugin({
+				all: false,
+				assets: true,
+				filename: "stats-server.json",
+				transform(data) {
+					return JSON.stringify(
+						{
+							js: data.assetsByChunkName.server[0]
+						},
+						null,
+						2
+					)
+				}
 			})
-		],
-		devServer: {
-			contentBase: "./dist",
-			historyApiFallback: true,
-			publicPath: "/"
-		},
-		devtool: argv.mode === "production" ? "source-map" : "eval-source-map"
+		)
+	} else {
+		plugins.push(
+			new ExtractPlugin({
+				filename: "[name].[contenthash].css",
+				insert() {}
+			}),
+			new StatsWriterPlugin({
+				all: false,
+				assets: true,
+				filename: "stats-client.json",
+				transform(data) {
+					return JSON.stringify(
+						{
+							css: data.assetsByChunkName.main[0],
+							js: data.assetsByChunkName.main[1]
+						},
+						null,
+						2
+					)
+				}
+			})
+		)
 	}
-}
 
-function getServerConfig(env, argv) {
-	const config = getClientConfig(env, argv)
+	// devtool
+	const devtool = !isServer && "source-map"
 
+	// target
+	const target = isServer ? "node" : "web"
+
+	// final config
 	return {
-		...config,
-		name: "server",
-		target: "node",
-		entry: {
-			server: "./src/server.js"
-		},
-		output: { ...config.output },
-		module: { ...config.module },
-		plugins: [
-			...config.plugins,
-			new LimitChunkCountPlugin({
-				maxChunks: 1
-			})
-		],
-		devServer: void 0,
-		devtool: false
+		name,
+		mode,
+		entry,
+		output,
+		module,
+		plugins,
+		devtool,
+		target
 	}
 }
 
-module.exports = [getClientConfig, getServerConfig]
+const clientConfig = createConfig("client")
+const serverConfig = createConfig("server")
+
+module.exports = [clientConfig, serverConfig]

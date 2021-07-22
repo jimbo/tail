@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react"
+import { useMemo } from "react"
 import { useStyle } from "../Style"
 import classes from "./productOptions.module.css"
 
