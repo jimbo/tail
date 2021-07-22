@@ -117,7 +117,16 @@ const createConfig = (name) => {
 			new StatsWriterPlugin({
 				all: false,
 				assets: true,
-				filename: "stats-server.json"
+				filename: "stats-server.json",
+				transform(data) {
+					return JSON.stringify(
+						{
+							js: data.assetsByChunkName.server[0]
+						},
+						null,
+						2
+					)
+				}
 			})
 		)
 	} else {
@@ -129,25 +138,26 @@ const createConfig = (name) => {
 			new StatsWriterPlugin({
 				all: false,
 				assets: true,
-				filename: "stats-client.json"
+				filename: "stats-client.json",
+				transform(data) {
+					return JSON.stringify(
+						{
+							css: data.assetsByChunkName.main[0],
+							js: data.assetsByChunkName.main[1]
+						},
+						null,
+						2
+					)
+				}
 			})
 		)
 	}
 
 	// devtool
-	// const devtool = isProduction || isServer ? "source-map" : "eval-source-map"
-	const devtool = false
+	const devtool = !isServer && "source-map"
 
 	// target
 	const target = isServer ? "node" : "web"
-
-	// stats
-	const stats = {
-		assets: true,
-		children: true,
-		chunks: false,
-		modules: false
-	}
 
 	// final config
 	return {

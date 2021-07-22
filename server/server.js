@@ -20,14 +20,11 @@ const buildAndRender = async (req, res) => {
 const waitForWebpack = async () => {
 	while (true) {
 		try {
-			const clientStats = require("../dist/stats-client.json")
-			const serverStats = require("../dist/stats-server.json")
-			const { main: clientAssets } = clientStats.assetsByChunkName
-			const { server: serverAssets } = serverStats.assetsByChunkName
-			const [filename] = serverAssets
+			const assets = require("../dist/stats-client.json")
+			const { js: filename } = require("../dist/stats-server.json")
 			const { default: render } = require(`../dist/${filename}`)
 
-			return { assets: clientAssets, render }
+			return { assets, render }
 		} catch (error) {
 			console.error(error)
 

@@ -2,8 +2,6 @@ import { pipeToNodeWritable } from "react-dom/server"
 import App from "../src/components/App"
 
 const render = (url, res, assets) => {
-	const [css, js] = assets
-	const assetMap = { css, js }
 	let didError = false
 
 	res.socket.on("error", (error) => {
@@ -12,7 +10,7 @@ const render = (url, res, assets) => {
 	})
 
 	const { abort, startWriting } = pipeToNodeWritable(
-		<App assets={assetMap} url={url} />,
+		<App assets={assets} url={url} />,
 		res,
 		{
 			onError() {
