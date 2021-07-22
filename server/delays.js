@@ -1,0 +1,9 @@
+const API_DELAY = 2000
+const BAILOUT_DELAY = 10000
+const JS_BUNDLE_DELAY = 4000
+
+module.exports = {
+	API_DELAY,
+	BAILOUT_DELAY,
+	JS_BUNDLE_DELAY
+}

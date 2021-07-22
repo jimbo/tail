@@ -1,5 +1,6 @@
 import { pipeToNodeWritable } from "react-dom/server"
 import App from "../src/components/App"
+const { API_DELAY, BAILOUT_DELAY } = require("./delays")
 
 const render = (url, res, assets) => {
 	let didError = false
@@ -27,7 +28,7 @@ const render = (url, res, assets) => {
 		}
 	)
 
-	setTimeout(abort, 10000)
+	setTimeout(abort, BAILOUT_DELAY)
 }
 
 export default render

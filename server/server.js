@@ -1,6 +1,16 @@
 const compress = require("compression")
 const express = require("express")
+const { JS_BUNDLE_DELAY } = require("./delays")
 const PORT = "4000"
+
+// add artificial delays
+const delay = (req, res, next) => {
+	if (req.url.endsWith(".js")) {
+		setTimeout(next, JS_BUNDLE_DELAY)
+	} else {
+		next()
+	}
+}
 
 // define callbacks for responding
 const respond = (fn) => async (req, res, next) => {
@@ -60,6 +70,7 @@ const handleListenError = (error) => {
 // create the express app and listen for requests
 const app = express()
 
+app.use(delay)
 app.use(compress())
 app.get("/", respond(buildAndRender))
 app.use(express.static("dist"))
