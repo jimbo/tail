@@ -49,6 +49,7 @@
     "*.css"
   ],
   "nodemonConfig": {
+    "ext": "css,js,jsx",
     "ignore": [
       "dist/*"
     ]

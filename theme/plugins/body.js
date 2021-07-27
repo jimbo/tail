@@ -2,7 +2,7 @@ const addRulesets = ({ addBase, theme }) => {
 	addBase({
 		body: {
 			backgroundColor: theme("colors.neutral.50"),
-			color: theme("colors.neutral.800"),
+			color: theme("venia.plugins.body.color"),
 			fontSize: theme("fontSize.DEFAULT")
 		}
 	})

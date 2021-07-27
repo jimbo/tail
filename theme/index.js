@@ -71,7 +71,7 @@ const config = {
 			"sm": "640px",
 			"md": "800px",
 			"lg": "960px",
-			"xl": "1020px",
+			"xl": "1120px",
 			"2xl": "1280px",
 			"3xl": "1440px"
 		},
@@ -87,10 +87,14 @@ const config = {
 			"DEFAULT": "384ms",
 			"enter": "224ms",
 			"exit": "192ms"
-		}
-	},
-	venia: {
-		foo: "foo"
+		},
+		venia: (theme) => ({
+			plugins: {
+				body: {
+					color: theme("colors.neutral.800")
+				}
+			}
+		})
 	}
 }
 
