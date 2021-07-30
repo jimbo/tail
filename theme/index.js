@@ -33,11 +33,29 @@ const config = {
 			lineHeight: {
 				DEFAULT: "1.5"
 			},
+			maxHeight: {
+				"screen-xs": "480px",
+				"screen-sm": "640px",
+				"screen-md": "800px",
+				"screen-lg": "960px",
+				"screen-xl": "1120px",
+				"screen-2xl": "1280px",
+				"screen-3xl": "1440px"
+			},
+			maxWidth: {
+				"screen-xs": "480px",
+				"screen-sm": "640px",
+				"screen-md": "800px",
+				"screen-lg": "960px",
+				"screen-xl": "1120px",
+				"screen-2xl": "1280px",
+				"screen-3xl": "1440px"
+			},
 			spacing: {
 				full: "100%",
-				xs: "0.75rem",
+				xs: "1rem",
 				sm: "1.5rem",
-				md: "2.25rem",
+				md: "2rem",
 				lg: "3rem"
 			}
 		},
@@ -62,8 +80,6 @@ const config = {
 			1200: "3.5rem",
 			DEFAULT: "0.875rem"
 		},
-		maxHeight: (theme) => theme("spacing"),
-		maxWidth: (theme) => theme("spacing"),
 		minHeight: (theme) => theme("spacing"),
 		minWidth: (theme) => theme("spacing"),
 		screens: {

@@ -49,22 +49,22 @@
 	composes: col-span-2 from global;
 	composes: gap-sm from global;
 	composes: grid from global;
+	composes: max-h-screen-md from global;
 	composes: overflow-auto from global;
-	max-height: 800px;
+	composes: pr-xs from global;
 }
 
 .thumbnail {
 	composes: object-center from global;
 	composes: object-contain from global;
 	composes: rounded-lg from global;
-	max-width: calc(100% - 1rem);
 }
 
 .image {
 	composes: bg-neutral-100 from global;
 	composes: col-span-7 from global;
+	composes: max-h-screen-md from global;
 	composes: rounded-lg from global;
-	max-height: 800px;
 }
 
 .mockImage {

@@ -55,16 +55,16 @@
     ]
   },
   "prettier": {
-    "printWidth": 80,
-    "tabWidth": 4,
-    "useTabs": true,
-    "semi": false,
-    "singleQuote": false,
-    "quoteProps": "consistent",
-    "jsxSingleQuote": false,
-    "trailingComma": "none",
+    "arrowParens": "always",
     "bracketSpacing": true,
     "jsxBracketSameLine": false,
-    "arrowParens": "always"
+    "jsxSingleQuote": false,
+    "printWidth": 80,
+    "quoteProps": "consistent",
+    "semi": false,
+    "singleQuote": false,
+    "tabWidth": 4,
+    "trailingComma": "none",
+    "useTabs": true
   }
 }
