@@ -24,7 +24,7 @@ const respond = (fn) => async (req, res, next) => {
 const buildAndRender = async (req, res) => {
 	const { assets, render } = await waitForWebpack()
 
-	render(req.url, res, assets)
+	await render(req.url, res, assets)
 }
 
 const waitForWebpack = async () => {

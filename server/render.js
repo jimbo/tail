@@ -1,8 +1,11 @@
+import { getDataFromTree } from "@apollo/client/react/ssr"
+import { cloneElement } from "react"
 import { pipeToNodeWritable } from "react-dom/server"
 import App from "../src/components/App"
+import { createClient } from "../src/hooks/useApolloClient"
 const { API_DELAY, BAILOUT_DELAY } = require("./delays")
 
-const render = (url, res, assets) => {
+const render = async (url, res, assets) => {
 	let didError = false
 
 	res.socket.on("error", (error) => {
@@ -10,23 +13,27 @@ const render = (url, res, assets) => {
 		console.error(error)
 	})
 
-	const { abort, startWriting } = pipeToNodeWritable(
-		<App assets={assets} url={url} />,
-		res,
-		{
-			onError() {
-				didError = true
-				console.error("A writing error occurred.")
-				console.error(error)
-			},
-			onReadyToStream() {
-				res.statusCode = didError ? 500 : 200
-				res.setHeader("Content-type", "text/html")
-				res.write("<!DOCTYPE html>")
-				startWriting()
-			}
+	// create a tree with an Apollo client so we can aggregate queries
+	const client = createClient()
+	let tree = <App assets={assets} initialClient={client} url={url} />
+
+	// let Apollo aggregate and run queries, then create a new tree
+	await getDataFromTree(tree)
+	tree = cloneElement(tree, { initialClient: client })
+
+	const { abort, startWriting } = pipeToNodeWritable(tree, res, {
+		onError() {
+			didError = true
+			console.error("A writing error occurred.")
+			console.error(error)
+		},
+		onReadyToStream() {
+			res.statusCode = didError ? 500 : 200
+			res.setHeader("Content-type", "text/html")
+			res.write("<!DOCTYPE html>")
+			startWriting()
 		}
-	)
+	})
 
 	setTimeout(abort, BAILOUT_DELAY)
 }

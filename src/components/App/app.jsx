@@ -1,13 +1,18 @@
+import { ApolloProvider } from "@apollo/client"
+import useApolloClient from "../../hooks/useApolloClient"
 import Html from "../Html"
 import Page from "../Page"
 
 const App = (props) => {
-	const { assets } = props
+	const { assets, initialClient } = props
+	const client = useApolloClient(initialClient)
 
 	return (
-		<Html assets={assets}>
-			<Page />
-		</Html>
+		<ApolloProvider client={client}>
+			<Html assets={assets}>
+				<Page />
+			</Html>
+		</ApolloProvider>
 	)
 }
 
