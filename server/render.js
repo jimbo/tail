@@ -22,7 +22,7 @@ const render = async (url, res, assets) => {
 	tree = cloneElement(tree, { initialClient: client })
 
 	const { abort, startWriting } = pipeToNodeWritable(tree, res, {
-		onError() {
+		onError(error) {
 			didError = true
 			console.error("A writing error occurred.")
 			console.error(error)
