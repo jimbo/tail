@@ -1,23 +1,13 @@
-import { gql, useApolloClient, useQuery } from "@apollo/client"
+import { useApolloClient } from "@apollo/client"
 import { useMemo } from "react"
 import { HelmetProvider } from "react-helmet-async"
 import StyleProvider from "../Style"
 
 const TITLE = "Tailwind Sandbox"
 
-const EXCHANGE_RATES = gql`
-	query GetExchangeRates {
-		rates(currency: "USD") {
-			currency
-			rate
-		}
-	}
-`
-
 const Html = (props) => {
 	const { assets, children } = props
 	const client = useApolloClient()
-	const queryState = useQuery(EXCHANGE_RATES)
 
 	const assetContent = useMemo(
 		() => ({

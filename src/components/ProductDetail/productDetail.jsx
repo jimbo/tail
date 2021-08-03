@@ -1,9 +1,13 @@
 import ProductConfig from "../ProductConfig"
 import { useStyle } from "../Style"
 import classes from "./productDetail.module.css"
+import useProductDetail from "./useProductDetail"
 
 const ProductDetail = (props) => {
 	useStyle(classes)
+
+	const { queryResult } = useProductDetail()
+	const { rates } = queryResult.data || {}
 
 	return (
 		<main className={classes.root}>
@@ -49,6 +53,7 @@ const ProductDetail = (props) => {
 			</div>
 			<div className={classes.config}>
 				<ProductConfig />
+				<p>{`${rates ? rates.length : "Awaiting"} results`}</p>
 			</div>
 			<div className={classes.description}>
 				<div className={classes.descriptionHeader}>
