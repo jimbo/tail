@@ -17,12 +17,12 @@ const render = async (url, res, assets) => {
 	const client = createClient()
 	let tree = <App assets={assets} initialClient={client} url={url} />
 
-	// let Apollo aggregate and run queries, then create a new tree
+	// let Apollo aggregate and run queries, then recreate the tree
 	await getDataFromTree(tree)
 	tree = cloneElement(tree, { initialClient: client })
 
 	const { abort, startWriting } = pipeToNodeWritable(tree, res, {
-		onError() {
+		onError(error) {
 			didError = true
 			console.error("A writing error occurred.")
 			console.error(error)
