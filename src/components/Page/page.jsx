@@ -4,7 +4,6 @@ import Footer from "../Footer"
 import Header from "../Header"
 import { useStyle } from "../Style"
 import classes from "./page.module.css"
-// import useProductDetail from "../ProductDetail/useProductDetail"
 
 const PageContext = createContext()
 const Checkout = lazy(() => import("../Checkout"))
@@ -51,9 +50,3 @@ const Page = (props) => {
 export default Page
 
 export const usePage = () => useContext(PageContext)
-
-// const Fallback = props => {
-// 	useProductDetail()
-
-// 	return null
-// }

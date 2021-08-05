@@ -21,6 +21,7 @@ const render = async (url, res, assets) => {
 	await getDataFromTree(tree)
 	tree = cloneElement(tree, { initialClient: client })
 
+	// render and stream
 	const { abort, startWriting } = pipeToNodeWritable(tree, res, {
 		onError(error) {
 			didError = true
