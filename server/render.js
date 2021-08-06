@@ -3,7 +3,7 @@ import { cloneElement } from "react"
 import { pipeToNodeWritable } from "react-dom/server"
 import App from "../src/components/App"
 import { createClient } from "../src/hooks/useApolloClient"
-const { API_DELAY, BAILOUT_DELAY } = require("./delays")
+const { BAILOUT_DELAY } = require("./delays")
 
 const render = async (url, res, assets) => {
 	let didError = false

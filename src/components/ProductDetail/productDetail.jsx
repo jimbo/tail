@@ -1,8 +1,8 @@
+import useProductDetail from "../../hooks/useProductDetail"
 import ProductConfig from "../ProductConfig"
 import Raw from "../Raw"
 import { useStyle } from "../Style"
 import classes from "./productDetail.module.css"
-import useProductDetail from "./useProductDetail"
 
 const ProductDetail = (props) => {
 	useStyle(classes)
