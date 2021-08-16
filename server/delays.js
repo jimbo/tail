@@ -1,5 +1,5 @@
 const API_DELAY = 0
-const BAILOUT_DELAY = 0
+const BAILOUT_DELAY = 10000
 const JS_BUNDLE_DELAY = 0
 
 module.exports = {
