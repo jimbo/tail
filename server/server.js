@@ -1,7 +1,9 @@
 const compress = require("compression")
 const express = require("express")
 const { JS_BUNDLE_DELAY } = require("./delays")
+
 const PORT = "4000"
+const PATHS = ["/", "/checkout", "/product"]
 
 // add artificial delays
 const delay = (req, res, next) => {
@@ -72,7 +74,6 @@ const app = express()
 
 app.use(delay)
 app.use(compress())
-app.get("/", respond(buildAndRender))
-app.get("/checkout", respond(buildAndRender))
+app.get(PATHS, respond(buildAndRender))
 app.use(express.static("dist"))
 app.listen(PORT, listen).on("error", handleListenError)

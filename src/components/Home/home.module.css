@@ -1,0 +1,33 @@
+.root {
+	composes: -mx-sm from global;
+	composes: sm_-mx-lg from global;
+}
+
+.hero {
+	composes: aspect-h-7 from global;
+	composes: aspect-w-16 from global;
+	composes: container from global;
+	composes: relative from global;
+}
+
+.slider {
+	composes: bg-neutral-100 from global;
+	composes: h-full from global;
+	composes: rounded-lg from global;
+	composes: w-full from global;
+}
+
+.tiles {
+	composes: -mt-sm from global;
+	composes: gap-sm from global;
+	composes: grid from global;
+	composes: grid-flow-row from global;
+	composes: lg_grid-flow-col from global;
+	composes: px-sm from global;
+	composes: relative from global;
+}
+
+.tileImage {
+	composes: bg-neutral-100 from global;
+	composes: rounded-lg from global;
+}

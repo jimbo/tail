@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useStyle } from "../Style"
 import classes from "./breadcrumbs.module.css"
 
@@ -6,9 +7,11 @@ const Breadcrumbs = (props) => {
 
 	return (
 		<nav className={classes.breadcrumbs}>
-			<a className={classes.link}>Home</a>
+			<Link className={classes.link} to="/">
+				Home
+			</Link>
 			<span className={classes.separator}>/</span>
-			<a className={classes.link}>Dresses</a>
+			<span className={classes.link}>Dresses</span>
 			<span className={classes.separator}>/</span>
 			<span className={classes.title}>Athena Tank Dress</span>
 		</nav>

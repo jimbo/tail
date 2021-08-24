@@ -1,3 +1,4 @@
+const aspectRatioPlugin = require("@tailwindcss/aspect-ratio")
 const { getColors } = require("./lib/colors")
 const matcher = require("./lib/matcher")
 const veniaPlugin = require("./plugins")
@@ -8,7 +9,7 @@ const config = {
 		float: false
 	},
 	mode: "jit",
-	plugins: [veniaPlugin],
+	plugins: [aspectRatioPlugin, veniaPlugin],
 	purge: {
 		content: ["./src/**/*.css"],
 		extractors: [
