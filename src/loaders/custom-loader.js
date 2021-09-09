@@ -7,7 +7,7 @@ loader.pitch = function pitch(request) {
 
 	return `
 const css = require(${req}).default
-exports = module.exports = css.locals
+exports = module.exports = css.locals || {}
 exports._getCss = () => css.toString()
 exports._getPath = () => css[0][0]
     `

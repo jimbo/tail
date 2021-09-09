@@ -1,52 +1,54 @@
-import { Suspense, createContext, lazy, useContext, useState } from "react"
+import { Suspense, lazy } from "react"
+import { Route, Routes, useMatch } from "react-router-dom"
 import Breadcrumbs from "../Breadcrumbs"
 import Footer from "../Footer"
 import Header from "../Header"
 import { useStyle } from "../Style"
 import classes from "./page.module.css"
 
-const PageContext = createContext()
 const Checkout = lazy(() => import("../Checkout"))
+const Home = lazy(() => import("../Home"))
 const ProductDetail = lazy(() => import("../ProductDetail"))
 
 const Page = (props) => {
 	useStyle(classes)
-	const [page, setPage] = useState("PRODUCT")
-	let main = null
 
-	switch (page) {
-		case "PRODUCT": {
-			main = (
-				<Suspense fallback={null}>
-					<ProductDetail />
-				</Suspense>
-			)
-			break
-		}
-		case "CHECKOUT": {
-			main = (
-				<Suspense fallback={null}>
-					<Checkout />
-				</Suspense>
-			)
-			break
-		}
-	}
+	const match = useMatch({ path: "/" })
+	const shouldRenderBreadcrumbs = !match
+	const breadcrumbs = shouldRenderBreadcrumbs ? <Breadcrumbs /> : null
+
+	const home = (
+		<Suspense fallback={null}>
+			<Home />
+		</Suspense>
+	)
+
+	const product = (
+		<Suspense fallback={null}>
+			<ProductDetail />
+		</Suspense>
+	)
+
+	const checkout = (
+		<Suspense fallback={null}>
+			<Checkout />
+		</Suspense>
+	)
 
 	return (
-		<PageContext.Provider value={setPage}>
-			<div className={classes.root}>
-				<Header />
-				<div className={classes.body}>
-					<Breadcrumbs />
-					{main}
-				</div>
-				<Footer />
+		<div className={classes.root}>
+			<Header />
+			<div className={classes.body}>
+				{breadcrumbs}
+				<Routes>
+					<Route element={home} path="/" />
+					<Route element={product} path="product" />
+					<Route element={checkout} path="checkout" />
+				</Routes>
 			</div>
-		</PageContext.Provider>
+			<Footer />
+		</div>
 	)
 }
 
 export default Page
-
-export const usePage = () => useContext(PageContext)

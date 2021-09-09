@@ -1,9 +1,9 @@
 import { getDataFromTree } from "@apollo/client/react/ssr"
 import { cloneElement } from "react"
 import { pipeToNodeWritable } from "react-dom/server"
-import App from "../src/components/App"
 import { createClient } from "../src/hooks/useApolloClient"
-const { API_DELAY, BAILOUT_DELAY } = require("./delays")
+import { BAILOUT_DELAY } from "./delays"
+import Tree from "./tree.jsx"
 
 const render = async (url, res, assets) => {
 	let didError = false
@@ -15,7 +15,7 @@ const render = async (url, res, assets) => {
 
 	// create a tree with an Apollo client so we can aggregate queries
 	const client = createClient()
-	let tree = <App assets={assets} initialClient={client} url={url} />
+	let tree = <Tree assets={assets} initialClient={client} url={url} />
 
 	// let Apollo aggregate and run queries, then recreate the tree
 	await getDataFromTree(tree)

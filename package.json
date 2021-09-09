@@ -37,15 +37,18 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.1",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
     "compression": "1.7.4",
     "concurrently": "^6.2.0",
     "cross-fetch": "^3.1.4",
     "express": "4.17.1",
     "graphql": "^15.5.1",
+    "history": "^5.0.1",
     "nodemon": "^2.0.12",
     "react": "^18.0.0-alpha-3e8c86c1c-20210630",
     "react-dom": "^18.0.0-alpha-3e8c86c1c-20210630",
     "react-helmet-async": "^1.0.9",
+    "react-router-dom": "^6.0.0-beta.0",
     "rimraf": "^3.0.2"
   },
   "sideEffects": [
