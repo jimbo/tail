@@ -1,17 +1,17 @@
 import { getDataFromTree } from "@apollo/client/react/ssr"
 import { cloneElement } from "react"
-import { pipeToNodeWritable } from "react-dom/server"
+import { pipeToNodeWritable, renderToString } from "react-dom/server"
 import { createClient } from "../src/hooks/useApolloClient"
 import { BAILOUT_DELAY } from "./delays"
 import Tree from "./tree.jsx"
 
 const render = async (url, res, assets) => {
-	let didError = false
+	// let didError = false
 
-	res.socket.on("error", (error) => {
-		console.error("A socket error occurred.")
-		console.error(error)
-	})
+	// res.socket.on("error", (error) => {
+	// 	console.error("A socket error occurred.")
+	// 	console.error(error)
+	// })
 
 	// create a tree with an Apollo client so we can aggregate queries
 	const client = createClient()
@@ -21,22 +21,24 @@ const render = async (url, res, assets) => {
 	await getDataFromTree(tree)
 	tree = cloneElement(tree, { initialClient: client })
 
-	// render and stream
-	const { abort, startWriting } = pipeToNodeWritable(tree, res, {
-		onError(error) {
-			didError = true
-			console.error("A writing error occurred.")
-			console.error(error)
-		},
-		onReadyToStream() {
-			res.statusCode = didError ? 500 : 200
-			res.setHeader("Content-type", "text/html")
-			res.write("<!DOCTYPE html>")
-			startWriting()
-		}
-	})
+	res.send(`<!DOCTYPE html>${renderToString(tree)}`)
 
-	setTimeout(abort, BAILOUT_DELAY)
+	// render and stream
+	// const { abort, startWriting } = pipeToNodeWritable(tree, res, {
+	// 	onError(error) {
+	// 		didError = true
+	// 		console.error("A writing error occurred.")
+	// 		console.error(error)
+	// 	},
+	// 	onReadyToStream() {
+	// 		res.statusCode = didError ? 500 : 200
+	// 		res.setHeader("Content-type", "text/html")
+	// 		res.write("<!DOCTYPE html>")
+	// 		startWriting()
+	// 	}
+	// })
+
+	// setTimeout(abort, BAILOUT_DELAY)
 }
 
 export default render
